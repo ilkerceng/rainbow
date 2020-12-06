@@ -54,6 +54,34 @@ import logger from 'logger';
 const AnimatedFloatingPanels = Animated.createAnimatedComponent(FloatingPanels);
 const Wrapper = ios ? KeyboardFixedOpenLayout : Fragment;
 
+const getTrackingCategory = type => {
+  switch (type) {
+    case ExchangeModalTypes.deposit:
+    case ExchangeModalTypes.withdrawal:
+      return 'savings';
+    case ExchangeModalTypes.addLiquidity:
+    case ExchangeModalTypes.removeLiquidity:
+      return 'liquidity';
+    default:
+      return 'swap';
+  }
+};
+
+const getDefaultGasLimit = type => {
+  switch (type) {
+    case ExchangeModalTypes.deposit:
+      return ethUnits.basic_deposit;
+    case ExchangeModalTypes.withdrawal:
+      return ethUnits.basic_withdrawal;
+    case ExchangeModalTypes.addLiquidity:
+      return ethUnits.basic_uniswap_add_liquidity;
+    case ExchangeModalTypes.removeLiquidity:
+      return ethUnits.basic_uniswap_remove_liquidity;
+    default:
+      return ethUnits.basic_swap;
+  }
+};
+
 export default function ExchangeModal({
   createRap,
   cTokenBalance,
@@ -78,13 +106,9 @@ export default function ExchangeModal({
 
   const isDeposit = type === ExchangeModalTypes.deposit;
   const isWithdrawal = type === ExchangeModalTypes.withdrawal;
-  const category = isDeposit || isWithdrawal ? 'savings' : 'swap';
+  const category = getTrackingCategory(type);
 
-  const defaultGasLimit = isDeposit
-    ? ethUnits.basic_deposit
-    : isWithdrawal
-    ? ethUnits.basic_withdrawal
-    : ethUnits.basic_swap;
+  const defaultGasLimit = getDefaultGasLimit(type);
 
   const dispatch = useDispatch();
   const {
@@ -156,9 +180,9 @@ export default function ExchangeModal({
     updateNativeAmount,
     updateOutputAmount,
   } = useSwapInputs({
+    category,
     defaultInputAsset,
     inputCurrency,
-    isDeposit,
     isWithdrawal,
     maxInputBalance,
     nativeFieldRef,
@@ -300,13 +324,7 @@ export default function ExchangeModal({
 
   // Liten to gas prices, Uniswap reserves updates
   useEffect(() => {
-    updateDefaultGasLimit(
-      isDeposit
-        ? ethUnits.basic_deposit
-        : isWithdrawal
-        ? ethUnits.basic_withdrawal
-        : ethUnits.basic_swap
-    );
+    updateDefaultGasLimit(defaultGasLimit);
     startPollingGasPrices();
     initWeb3Listener();
     return () => {
@@ -314,9 +332,8 @@ export default function ExchangeModal({
       stopWeb3Listener();
     };
   }, [
+    defaultGasLimit,
     initWeb3Listener,
-    isDeposit,
-    isWithdrawal,
     startPollingGasPrices,
     stopPollingGasPrices,
     stopWeb3Listener,
@@ -628,7 +645,6 @@ export default function ExchangeModal({
                 <ConfirmExchangeButton
                   disabled={!Number(inputAmountDisplay)}
                   isAuthorizing={isAuthorizing}
-                  isDeposit={isDeposit}
                   isSufficientBalance={isSufficientBalance}
                   isSufficientGas={isSufficientGas}
                   isSufficientLiquidity={isSufficientLiquidity}

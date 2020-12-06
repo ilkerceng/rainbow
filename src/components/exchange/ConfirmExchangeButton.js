@@ -10,6 +10,21 @@ const ConfirmExchangeButtonShadows = [
   [0, 1, 18, colors.black, 0.12],
 ];
 
+const getLabel = type => {
+  switch (type) {
+    case ExchangeModalTypes.addLiquidity:
+      return 'Add Liquidity';
+    case ExchangeModalTypes.deposit:
+      return 'Hold to Deposit';
+    case ExchangeModalTypes.removeLiquidity:
+      return 'Remove Liquidity';
+    case ExchangeModalTypes.withdrawal:
+      return 'Hold to Withdraw ';
+    default:
+      return 'Hold to Swap';
+  }
+};
+
 const ConfirmExchangeButton = ({
   disabled,
   isAuthorizing,
@@ -22,12 +37,8 @@ const ConfirmExchangeButton = ({
   type,
   ...props
 }) => {
-  let label =
-    type === ExchangeModalTypes.deposit
-      ? 'Hold to Deposit'
-      : type === ExchangeModalTypes.withdrawal
-      ? 'Hold to Withdraw '
-      : 'Hold to Swap';
+  let label = getLabel(type);
+
   if (!isSufficientBalance) {
     label = 'Insufficient Funds';
   } else if (!isSufficientLiquidity) {

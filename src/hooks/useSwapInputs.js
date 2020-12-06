@@ -12,9 +12,9 @@ import {
 import logger from 'logger';
 
 export default function useSwapInputs({
+  category,
   defaultInputAsset,
   inputCurrency,
-  isDeposit,
   isWithdrawal,
   maxInputBalance,
   nativeFieldRef,
@@ -78,7 +78,7 @@ export default function useSwapInputs({
 
       if (newAmountDisplay) {
         analytics.track('Updated input amount', {
-          category: isDeposit ? 'savings' : 'swap',
+          category,
           defaultInputAsset: get(defaultInputAsset, 'symbol', ''),
           type,
           value: convertStringToNumber(newAmountDisplay),
@@ -86,9 +86,9 @@ export default function useSwapInputs({
       }
     },
     [
+      category,
       defaultInputAsset,
       inputCurrency,
-      isDeposit,
       isWithdrawal,
       maxInputBalance,
       nativeFieldRef,
@@ -139,14 +139,14 @@ export default function useSwapInputs({
       setOutputAmountDisplay(newAmountDisplay || newOutputAmount);
       if (newAmountDisplay) {
         analytics.track('Updated output amount', {
-          category: isWithdrawal || isDeposit ? 'savings' : 'swap',
+          category,
           defaultInputAsset: get(defaultInputAsset, 'symbol', ''),
           type,
           value: convertStringToNumber(newAmountDisplay),
         });
       }
     },
-    [defaultInputAsset, isDeposit, isWithdrawal, type]
+    [category, defaultInputAsset, type]
   );
 
   return {
