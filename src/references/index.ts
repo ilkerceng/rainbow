@@ -15,6 +15,7 @@ export {
   UNISWAP_V2_ROUTER_ABI,
   UNISWAP_V2_ROUTER_ADDRESS,
 } from './uniswap';
+export { default as smartContractMethods } from './smartcontract-methods.json';
 export { default as chains } from './chains.json';
 export { default as compoundCERC20ABI } from './compound/compound-cerc20-abi.json';
 export { default as compoundCETHABI } from './compound/compound-ceth-abi.json';
@@ -23,7 +24,7 @@ export { default as erc20ABI } from './erc20-abi.json';
 export { default as ethUnits } from './ethereum-units.json';
 export { default as supportedNativeCurrencies } from './native-currencies.json';
 export { default as shitcoins } from './shitcoins.json';
-export { ZAP_IN_ABI } from './zapper';
+export { ZAP_IN_ABI, ZapInAddress } from './zapper';
 
 export const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000';
 export const ETH_ADDRESS = 'eth';

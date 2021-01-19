@@ -7,16 +7,16 @@ import { JsonRpcProvider } from '@ethersproject/providers';
 import { parseEther } from '@ethersproject/units';
 import { get, replace, startsWith } from 'lodash';
 import { INFURA_PROJECT_ID, INFURA_PROJECT_ID_DEV } from 'react-native-dotenv';
-import AssetTypes from '../helpers/assetTypes';
-import NetworkTypes from '../helpers/networkTypes';
+import AssetTypes from '@rainbow-me/helpers/assetTypes';
+import NetworkTypes from '@rainbow-me/networkTypes';
+import { smartContractMethods } from '@rainbow-me/references';
 import {
   convertAmountToRawAmount,
   convertStringToHex,
   handleSignificantDecimals,
   multiply,
-} from '../helpers/utilities';
-import smartContractMethods from '../references/smartcontract-methods.json';
-import { ethereumUtils } from '../utils';
+} from '@rainbow-me/utilities';
+import { ethereumUtils } from '@rainbow-me/utils';
 
 const infuraProjectId = __DEV__ ? INFURA_PROJECT_ID_DEV : INFURA_PROJECT_ID;
 const infuraUrl = `https://network.infura.io/v3/${infuraProjectId}`;
