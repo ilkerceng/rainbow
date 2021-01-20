@@ -3,7 +3,7 @@ import styled from 'styled-components/primitives';
 import { useDimensions, useImageMetadata } from '../../../hooks';
 import { magicMemo } from '../../../utils';
 import { Centered } from '../../layout';
-import { UniqueTokenImage } from '../../unique-token';
+import { UniqueToken3d, UniqueTokenImage } from '../../unique-token';
 import { margin, padding, position } from '@rainbow-me/styles';
 
 const paddingHorizontal = 19;
@@ -36,15 +36,28 @@ const UniqueTokenExpandedStateImage = ({ asset }) => {
   const containerHeight =
     heightForDeviceSize > maxImageHeight ? maxImageWidth : heightForDeviceSize;
 
+  const { animation_url: animationUrl } = asset;
+
+  const supports3D =
+    typeof animationUrl === 'string' && animationUrl.endsWith('.glb');
+
+  const backgroundColor = asset.background;
   return (
     <Container height={containerHeight}>
       <ImageWrapper isImageHuge={heightForDeviceSize > maxImageHeight}>
-        <UniqueTokenImage
-          backgroundColor={asset.background}
-          imageUrl={imageUrl}
-          item={asset}
-          resizeMode="contain"
-        />
+        {supports3D ? (
+          <UniqueToken3d
+            animationUrl={animationUrl}
+            backgroundColor={backgroundColor}
+          />
+        ) : (
+          <UniqueTokenImage
+            backgroundColor={backgroundColor}
+            imageUrl={imageUrl}
+            item={asset}
+            resizeMode="contain"
+          />
+        )}
       </ImageWrapper>
     </Container>
   );

@@ -11184,6 +11184,13 @@ react-timer-mixin@^0.13.4:
   resolved "https://registry.yarnpkg.com/react-timer-mixin/-/react-timer-mixin-0.13.4.tgz#75a00c3c94c13abe29b43d63b4c65a88fc8264d3"
   integrity sha512-4+ow23tp/Tv7hBM5Az5/Be/eKKF7DIvJ09voz5LyHGQaqqz9WV8YMs31eFvcYQs7d451LSg7kDJV70XYN/Ug/Q==
 
+react-viro@^2.17.0:
+  version "2.17.0"
+  resolved "https://registry.yarnpkg.com/react-viro/-/react-viro-2.17.0.tgz#2e46dbf33111c79eaa6af58e008b1eb7f900cd00"
+  integrity sha512-5100TePD0X62DRCF1ELOOz/J0b+NJNcQHlppqFW4OHwzxI2ONfSKWAkwooYseinHgSWqe12z5jWf51aF7aHuDQ==
+  dependencies:
+    prop-types "^15.5.10"
+
 react@16.11.0:
   version "16.11.0"
   resolved "https://registry.yarnpkg.com/react/-/react-16.11.0.tgz#d294545fe62299ccee83363599bf904e4a07fdbb"
