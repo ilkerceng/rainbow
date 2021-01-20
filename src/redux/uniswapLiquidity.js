@@ -1,12 +1,12 @@
 import produce from 'immer';
 import { concat, isEmpty, uniqBy } from 'lodash';
+import { getLiquidityInfo } from '@rainbow-me/handlers/uniswapLiquidityInfo';
 import {
   getLiquidity,
   getUniswapLiquidityInfo,
   saveLiquidity,
   saveLiquidityInfo,
-} from '../handlers/localstorage/uniswap';
-import { getLiquidityInfo } from '../handlers/uniswapLiquidity';
+} from '@rainbow-me/localstorage/uniswap';
 
 // -- Constants ------------------------------------------------------------- //
 const UNISWAP_UPDATE_LIQUIDITY_TOKEN_INFO =
