@@ -26,6 +26,7 @@ export { default as supportedNativeCurrencies } from './native-currencies.json';
 export { default as shitcoins } from './shitcoins.json';
 export { ZAP_IN_ABI, ZapInAddress } from './zapper';
 
+export const RAINBOW_ADDRESS = '0x7a3d05c70581bd345fe117c06e45f9669205384f';
 export const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000';
 export const ETH_ADDRESS = 'eth';
 export const WETH_ADDRESS = '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2';
