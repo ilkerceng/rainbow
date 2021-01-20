@@ -199,6 +199,7 @@
     "react-query": "^1.3.0",
     "react-redux": "^7.1.3",
     "react-style-proptype": "^3.2.2",
+    "react-viro": "^2.17.0",
     "readable-stream": "^1.0.33",
     "reanimated-bottom-sheet": "^1.0.0-alpha.18",
     "recompact": "^3.4.0",

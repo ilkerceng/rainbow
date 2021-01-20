@@ -74,6 +74,10 @@ target 'Rainbow' do
   pod 'libwebp'
   pod 'RNInputMask', :path => '../node_modules/react-native-text-input-mask/ios/InputMask'
 
+  # Viro
+  pod 'ViroReact', :path => '../node_modules/react-viro/ios/'
+  pod 'ViroKit_static_lib', :path => '../node_modules/react-viro/ios/dist/ViroRenderer/static_lib'
+
   permissions_path = '../node_modules/react-native-permissions/ios'
   pod 'Permission-Camera', :path => "#{permissions_path}/Camera.podspec"
   pod 'Permission-FaceID', :path => "#{permissions_path}/FaceID.podspec"
