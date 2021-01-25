@@ -1,7 +1,8 @@
 import { Wallet } from '@ethersproject/wallet';
 import analytics from '@segment/analytics-react-native';
 import { captureException } from '@sentry/react-native';
-import { Trade } from '@uniswap/sdk';
+import { ChainId, Trade } from '@uniswap/sdk';
+
 import { get, join, map } from 'lodash';
 import { rapsAddOrUpdate } from '../redux/raps';
 import store from '../redux/store';
@@ -21,6 +22,7 @@ export interface RapActionParameters {
   accountAddress?: string;
   amount?: string | null;
   assetToUnlock?: Asset;
+  chainId?: ChainId;
   contractAddress?: string;
   inputAmount?: string | null;
   inputCurrency?: Asset;
@@ -39,6 +41,13 @@ export interface DepositActionParameters {
   network: string;
   override?: string | null;
   selectedGasPrice: SelectedGasPrice;
+}
+
+export interface DepositUniswapActionParameters
+  extends DepositActionParameters {
+  chainId: ChainId;
+  depositToken: string;
+  outputCurrency: Asset;
 }
 
 export interface UnlockActionParameters {
