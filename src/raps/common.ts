@@ -6,16 +6,24 @@ import { ChainId, Trade } from '@uniswap/sdk';
 import { get, join, map } from 'lodash';
 import { rapsAddOrUpdate } from '../redux/raps';
 import store from '../redux/store';
-import { depositCompound, swap, unlock, withdrawCompound } from './actions';
+import {
+  depositCompound,
+  depositUniswap,
+  swap,
+  unlock,
+  withdrawCompound,
+} from './actions';
 import { Asset, SelectedGasPrice } from '@rainbow-me/entities';
 
 import logger from 'logger';
 
 export enum RapActionType {
   depositCompound = 'depositCompound',
+  depositUniswap = 'depositUniswap',
   swap = 'swap',
   unlock = 'unlock',
   withdrawCompound = 'withdrawCompound',
+  withdrawUniswap = 'withdrawUniswap',
 }
 
 export interface RapActionParameters {
@@ -100,9 +108,11 @@ const NOOP = () => {};
 
 export const RapActionTypes = {
   depositCompound: 'depositCompound' as RapActionType,
+  depositUniswap: 'depositUniswap' as RapActionType,
   swap: 'swap' as RapActionType,
   unlock: 'unlock' as RapActionType,
   withdrawCompound: 'withdrawCompound' as RapActionType,
+  withdrawUniswap: 'withdrawUniswap' as RapActionType,
 };
 
 const findActionByType = (type: RapActionType) => {
@@ -113,6 +123,8 @@ const findActionByType = (type: RapActionType) => {
       return swap;
     case RapActionTypes.depositCompound:
       return depositCompound;
+    case RapActionTypes.depositUniswap:
+      return depositUniswap;
     case RapActionTypes.withdrawCompound:
       return withdrawCompound;
     default:

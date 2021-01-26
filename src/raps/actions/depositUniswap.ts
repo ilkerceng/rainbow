@@ -31,7 +31,7 @@ export const getDepositUniswapGasLimit = (inputCurrency: Asset) =>
     ? ethUnits.basic_deposit_eth
     : ethUnits.basic_deposit;
 
-const depositUniswapLP = async (
+const depositUniswap = async (
   wallet: Wallet,
   currentRap: Rap,
   index: number,
@@ -66,7 +66,7 @@ const depositUniswapLP = async (
   logger.log(`${actionTag} gas price`, gasPrice);
 
   const transactionParams = {
-    gasLimit: getDepositGasLimit(inputCurrency),
+    gasLimit: getDepositUniswapGasLimit(inputCurrency),
     gasPrice: toHex(gasPrice),
   };
 
@@ -135,4 +135,4 @@ const depositUniswapLP = async (
   return null;
 };
 
-export default depositUniswapLP;
+export default depositUniswap;
